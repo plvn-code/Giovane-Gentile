@@ -66,13 +66,13 @@ function rowTemplate(item, readOnly) {
       </div>
 
       <div class="wish-cell wish-cell--product">
-        <a href="${esc(item.link || 'catalog.html?cat=new')}" class="wish-thumb">
+        <a href="${esc(productUrl(item.id))}" class="wish-thumb">
           ${item.sale ? '<span class="wish-thumb__badge">Sale</span>' : ''}
           ${thumb}
         </a>
         <div class="wish-info">
           <p class="wish-info__cat">${esc(item.category)}</p>
-          <a href="${esc(item.link || 'catalog.html?cat=new')}" class="wish-info__name">${esc(item.name || 'Скоро в продажу')}</a>
+          <a href="${esc(productUrl(item.id))}" class="wish-info__name">${esc(item.name || 'Скоро в продажу')}</a>
           <p class="wish-info__meta">${esc(item.section || '')}${added ? ` · додано ${esc(added)}` : ''}</p>
         </div>
       </div>

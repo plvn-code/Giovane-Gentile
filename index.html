@@ -27,10 +27,13 @@
           <span class="topbar__count" data-wish-count hidden>0</span>
         </a>
         <span class="topbar__sep" aria-hidden="true"></span>
-        <a href="#" class="topbar__link topbar__cart">
-          Кошик / 0 ₴
-          <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.8a1.5 1.5 0 0 0 1.5-1.1L21 7H6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg>
-        </a>
+        <span class="topbar__cart-wrap">
+          <a href="#" class="topbar__link topbar__cart" aria-label="Кошик">
+            Кошик / <b data-cart-total>0 ₴</b>
+            <span class="topbar__cart-icon"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.8a1.5 1.5 0 0 0 1.5-1.1L21 7H6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg><span class="topbar__count" data-cart-count hidden>0</span></span>
+          </a>
+          <div class="mini-cart" data-mini-cart></div>
+        </span>
       </div>
     </div>
   </div>
@@ -88,6 +91,12 @@
           <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
         </button>
       </form>
+
+      <button type="button" class="header__cart" data-cart-toggle aria-label="Кошик">
+        <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.8a1.5 1.5 0 0 0 1.5-1.1L21 7H6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span class="header__cart-count" data-cart-count hidden>0</span>
+      </button>
+      <div class="mini-cart mini-cart--mobile" data-mini-cart></div>
     </div>
   </header>
 
@@ -298,5 +307,6 @@
 
   <script src="js/main.js"></script>
   <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
 </body>
 </html>

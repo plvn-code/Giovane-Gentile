@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Товар — Giovane Gentile</title>
+  <meta name="description" content="Giovane Gentile — бутик преміального італійського чоловічого одягу, взуття та аксесуарів.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <!-- ========== TOP BAR ========== -->
+  <div class="topbar">
+    <div class="container topbar__inner">
+      <span class="topbar__spacer" aria-hidden="true"></span>
+      <p class="topbar__text">Italian Quality. Timeless Style.</p>
+      <div class="topbar__actions">
+        <a href="account.html" class="topbar__link topbar__account" data-account><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4 21c1.2-4 4.4-6 8-6s6.8 2 8 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg> Кабінет</a>
+        <span class="topbar__sep" aria-hidden="true"></span>
+        <a href="wishlist.html" class="topbar__icon topbar__wish" aria-label="Обране">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.6-9.2C1 8.6 3 5 6.6 5c2 0 3.4 1.1 4.4 2.5C12 6.1 13.4 5 15.4 5 19 5 21 8.6 19.6 11.8 17.5 16.4 12 21 12 21z" fill="currentColor"/></svg>
+          <span class="topbar__count" data-wish-count hidden>0</span>
+        </a>
+        <span class="topbar__sep" aria-hidden="true"></span>
+        <span class="topbar__cart-wrap">
+          <a href="#" class="topbar__link topbar__cart" aria-label="Кошик">
+            Кошик / <b data-cart-total>0 ₴</b>
+            <span class="topbar__cart-icon"><svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.8a1.5 1.5 0 0 0 1.5-1.1L21 7H6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg><span class="topbar__count" data-cart-count hidden>0</span></span>
+          </a>
+          <div class="mini-cart" data-mini-cart></div>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== HEADER ========== -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <button class="burger" id="burger" aria-label="Меню" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+
+      <a href="index.html" class="logo" aria-label="Giovane Gentile — на головну">
+        <span class="logo__name">Giovane Gentile</span>
+        <span class="logo__sub">Italian Boutique</span>
+      </a>
+
+      <nav class="nav" aria-label="Головне меню">
+        <ul class="nav__list">
+          <li class="nav__item has-drop">
+            <a href="catalog.html?cat=odyag" class="nav__link">Одяг <i class="chev" aria-hidden="true"></i></a>
+            <ul class="drop">
+              <li><a href="catalog.html?cat=odyag&amp;sub=sorochky">Сорочки</a></li>
+              <li><a href="catalog.html?cat=odyag&amp;sub=trykotazh">Трикотаж</a></li>
+              <li><a href="catalog.html?cat=odyag&amp;sub=pidzhaky">Піджаки та костюми</a></li>
+              <li><a href="catalog.html?cat=odyag&amp;sub=shtany">Штани</a></li>
+              <li><a href="catalog.html?cat=odyag&amp;sub=verkhniy">Верхній одяг</a></li>
+            </ul>
+          </li>
+          <li class="nav__item has-drop">
+            <a href="catalog.html?cat=vzuttya" class="nav__link">Взуття <i class="chev" aria-hidden="true"></i></a>
+            <ul class="drop">
+              <li><a href="catalog.html?cat=vzuttya&amp;sub=tufli">Туфлі</a></li>
+              <li><a href="catalog.html?cat=vzuttya&amp;sub=lofery">Лофери</a></li>
+              <li><a href="catalog.html?cat=vzuttya&amp;sub=kedy">Кеди та кросівки</a></li>
+              <li><a href="catalog.html?cat=vzuttya&amp;sub=cherevyky">Черевики</a></li>
+            </ul>
+          </li>
+          <li class="nav__item has-drop">
+            <a href="catalog.html?cat=aksesuary" class="nav__link">Аксесуари <i class="chev" aria-hidden="true"></i></a>
+            <ul class="drop">
+              <li><a href="catalog.html?cat=aksesuary&amp;sub=remeni">Ремені</a></li>
+              <li><a href="catalog.html?cat=aksesuary&amp;sub=ryukzaky">Рюкзаки та сумки</a></li>
+              <li><a href="catalog.html?cat=aksesuary&amp;sub=ubory">Головні убори</a></li>
+              <li><a href="catalog.html?cat=aksesuary&amp;sub=sharfy">Шарфи</a></li>
+            </ul>
+          </li>
+          <li class="nav__item"><a href="catalog.html?cat=new" class="nav__link">Новинки</a></li>
+          <li class="nav__item"><a href="catalog.html?cat=sale" class="nav__link nav__link--sale">Sale</a></li>
+        </ul>
+      </nav>
+
+      <form class="search" role="search" onsubmit="return false">
+        <input type="search" class="search__input" placeholder="Пошук…" aria-label="Пошук">
+        <button class="search__btn" aria-label="Шукати">
+          <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M15.5 15.5 21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        </button>
+      </form>
+
+      <button type="button" class="header__cart" data-cart-toggle aria-label="Кошик">
+        <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true"><path d="M2 3h3l2.6 12.2a1.5 1.5 0 0 0 1.5 1.2h8.8a1.5 1.5 0 0 0 1.5-1.1L21 7H6.2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="9.5" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg>
+        <span class="header__cart-count" data-cart-count hidden>0</span>
+      </button>
+      <div class="mini-cart mini-cart--mobile" data-mini-cart></div>
+    </div>
+  </header>
+
+  <!-- Mobile menu -->
+  <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+    <div class="mobile-nav__panel">
+      <button class="mobile-nav__close" id="mobile-close" aria-label="Закрити меню">&times;</button>
+      <span class="logo__name">Giovane Gentile</span>
+      <ul>
+        <li><a href="catalog.html?cat=odyag">Одяг</a></li>
+        <li><a href="catalog.html?cat=vzuttya">Взуття</a></li>
+        <li><a href="catalog.html?cat=aksesuary">Аксесуари</a></li>
+        <li><a href="catalog.html?cat=new">Новинки</a></li>
+        <li><a href="catalog.html?cat=sale" class="nav__link--sale">Sale</a></li>
+        <li><a href="account.html" data-account>Кабінет</a></li>
+        <li><a href="wishlist.html">Обране</a></li>
+        <li><a href="index.html#contact">Контакти</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <main class="product-page">
+    <div class="container">
+
+      <nav class="breadcrumbs breadcrumbs--start" id="product-crumbs" aria-label="Навігація"></nav>
+
+      <!-- Повідомлення після додавання в кошик -->
+      <div class="product-added" id="product-added" role="status" hidden>
+        <span class="product-added__icon" aria-hidden="true">✓</span>
+        <p><span id="product-added-text"></span></p>
+        <button type="button" class="product-added__link" data-cart-show>Переглянути кошик</button>
+      </div>
+
+      <!-- ========== PRODUCT ========== -->
+      <article class="product" id="product" hidden>
+        <div class="product__gallery">
+          <div class="product__main" id="p-main">
+            <span class="card__badge" id="p-badge" hidden>Sale</span>
+            <span class="product__soon">Soon</span>
+            <span class="product__view" id="p-view">Вигляд спереду</span>
+          </div>
+          <div class="product__thumbs" id="p-thumbs"></div>
+        </div>
+
+        <div class="product__info">
+          <p class="product__cat" id="p-cat"></p>
+          <h1 class="product__title" id="p-title"></h1>
+          <span class="product__rule" aria-hidden="true"></span>
+          <p class="product__price" id="p-price"></p>
+          <p class="product__lead" id="p-lead"></p>
+
+          <div class="sizes" id="p-sizes-box">
+            <div class="sizes__head">
+              <span class="sizes__label">Розмір<b id="p-size-label"></b></span>
+              <button type="button" class="sizes__clear" id="p-size-clear" hidden>Очистити</button>
+            </div>
+            <div class="sizes__grid" id="p-sizes" role="radiogroup" aria-label="Розмір"></div>
+            <p class="sizes__error" id="p-size-error" hidden>Оберіть, будь ласка, розмір</p>
+          </div>
+
+          <p class="product__stock" id="p-stock" hidden>Є в наявності</p>
+
+          <div class="product__buy">
+            <button type="button" class="btn btn--dark product__add" id="p-add" data-cart-keep>Додати в кошик</button>
+            <button type="button" class="product__fav" id="p-fav" aria-label="Додати в обране"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M12 20s-7-4.3-9-8.6C1.7 8.4 3.6 5 7 5c1.9 0 3.2 1 5 2.8C13.8 6 15.1 5 17 5c3.4 0 5.3 3.4 4 6.4C19 15.7 12 20 12 20z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></button>
+          </div>
+
+          <ul class="product__perks">
+            <li>Доставка Новою Поштою по Україні</li>
+            <li>Оплата при отриманні — можна оглянути товар</li>
+            <li>Обмін та повернення протягом 14 днів</li>
+          </ul>
+
+          <dl class="product__meta" id="p-meta"></dl>
+
+          <div class="product__share" id="p-share"></div>
+
+          <p class="orders-demo product__demo" id="p-demo" hidden>Демо-дані: назва, ціна та характеристики згенеровані для макета — їх замінять реальні товари.</p>
+        </div>
+      </article>
+
+      <!-- ========== DETAILS ========== -->
+      <section class="product-details" id="product-details" hidden>
+        <details class="acc" open>
+          <summary>Опис</summary>
+          <div class="acc__body" id="p-desc"></div>
+        </details>
+        <details class="acc">
+          <summary>Додаткова інформація</summary>
+          <div class="acc__body"><table class="attrs" id="p-attrs"></table></div>
+        </details>
+      </section>
+
+      <!-- ========== RELATED ========== -->
+      <section class="related" id="related-section" hidden>
+        <h2 class="section-title"><span>Супутні товари</span></h2>
+        <div class="carousel" id="related" data-section="Супутні товари">
+          <button class="carousel__arrow carousel__arrow--prev" aria-label="Попередні">
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="M15 4 7 12l8 8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+          <div class="carousel__track" tabindex="0" aria-label="Супутні товари"></div>
+          <button class="carousel__arrow carousel__arrow--next" aria-label="Наступні">
+            <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><path d="m9 4 8 8-8 8" fill="none" stroke="currentColor" stroke-width="1.8"/></svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- ========== NOT FOUND ========== -->
+      <div class="wish-empty product-missing" id="product-missing" hidden>
+        <h2>Товар не знайдено</h2>
+        <p>Можливо, посилання застаріло або товар більше не доступний.</p>
+        <div class="wish-empty__actions">
+          <a href="catalog.html?cat=new" class="btn btn--dark">Переглянути новинки</a>
+          <a href="catalog.html?cat=odyag" class="btn btn--outline">До каталогу</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ========== FOOTER ========== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <a href="index.html" class="logo logo--footer">
+        <span class="logo__name">Giovane Gentile</span>
+        <span class="logo__sub">Italian Boutique</span>
+      </a>
+      <ul class="footer__nav">
+        <li><a href="catalog.html?cat=odyag">Одяг</a></li>
+        <li><a href="catalog.html?cat=vzuttya">Взуття</a></li>
+        <li><a href="catalog.html?cat=aksesuary">Аксесуари</a></li>
+        <li><a href="catalog.html?cat=new">Новинки</a></li>
+        <li><a href="catalog.html?cat=sale">Sale</a></li>
+        <li><a href="index.html#contact">Контакти</a></li>
+      </ul>
+      <p class="footer__copy">© 2026 Giovane Gentile. Усі права захищені.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/products.js"></script>
+  <script src="js/product.js"></script>
+</body>
+</html>

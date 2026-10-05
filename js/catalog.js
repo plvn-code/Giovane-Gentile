@@ -3,67 +3,18 @@
    Сторінка: catalog.html?cat=<розділ>&sub=<підрозділ>
    ========================================================= */
 
-const CATALOG = {
-  odyag: {
-    title: 'Одяг',
-    subs: {
-      sorochky: 'Сорочки',
-      trykotazh: 'Трикотаж',
-      pidzhaky: 'Піджаки та костюми',
-      shtany: 'Штани',
-      verkhniy: 'Верхній одяг',
-    },
-  },
-  vzuttya: {
-    title: 'Взуття',
-    subs: {
-      tufli: 'Туфлі',
-      lofery: 'Лофери',
-      kedy: 'Кеди та кросівки',
-      cherevyky: 'Черевики',
-    },
-  },
-  aksesuary: {
-    title: 'Аксесуари',
-    subs: {
-      remeni: 'Ремені',
-      ryukzaky: 'Рюкзаки та сумки',
-      ubory: 'Головні убори',
-      sharfy: 'Шарфи',
-    },
-  },
-  new: {
-    title: 'Новинки',
-    subs: { odyag: 'Одяг', vzuttya: 'Взуття', aksesuary: 'Аксесуари' },
-  },
-  sale: {
-    title: 'Sale',
-    badge: 'Sale',
-    subs: { odyag: 'Одяг', vzuttya: 'Взуття', aksesuary: 'Аксесуари' },
-  },
-};
+/* CATALOG та labelsFor — у js/products.js */
 
 const PER_PAGE = 20; // 4 в ряд × 5 рядів
-
-/* Назви підкатегорій для підписів карток (для «Новинки» / «Sale») */
-function labelsFor(catKey, subKey) {
-  const cat = CATALOG[catKey];
-
-  if (catKey === 'new' || catKey === 'sale') {
-    const groups = subKey ? [subKey] : Object.keys(cat.subs);
-    return groups.flatMap((g) => Object.values(CATALOG[g].subs));
-  }
-  return subKey ? [cat.subs[subKey]] : Object.values(cat.subs);
-}
 
 /*
   Поки фото немає — картка показує SOON.
   Коли з'являться товари, передайте сюди { image, name, price, oldPrice }.
 */
-function catalogCard(category, badge) {
+function catalogCard(id, category, badge) {
   return `
     <article class="card card--catalog">
-      <a href="#" class="card__media" aria-label="Скоро в продажу">
+      <a href="${productUrl(id)}" class="card__media" aria-label="Скоро в продажу">
         ${badge ? `<span class="card__badge">${badge}</span>` : ''}
         <span class="card__soon card__soon--caps">Soon</span>
       </a>
@@ -107,7 +58,7 @@ function initCatalog() {
   // Cards
   const labels = labelsFor(catKey, subKey);
   grid.innerHTML = Array.from({ length: PER_PAGE }, (_, i) =>
-    catalogCard(labels[i % labels.length], cat.badge)).join('');
+    catalogCard(`${catKey}-${subKey || 'all'}-${i + 1}`, labels[i % labels.length], cat.badge)).join('');
   document.getElementById('catalog-count').textContent = `${PER_PAGE} товарів`;
 
   // Hearts → wishlist
@@ -118,6 +69,7 @@ function initCatalog() {
       category: labels[i % labels.length],
       section,
       sale: catKey === 'sale',
+      link: productUrl(`${catKey}-${subKey || 'all'}-${i + 1}`),
     });
   });
 

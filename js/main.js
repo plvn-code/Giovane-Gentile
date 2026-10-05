@@ -131,6 +131,9 @@ function showToast(text, withLink) {
   showToast.timer = setTimeout(() => toast.classList.remove('is-visible'), 2600);
 }
 
+/* Посилання на сторінку товару */
+function productUrl(id) { return `product.html?id=${encodeURIComponent(id)}`; }
+
 function cardTemplate(p) {
   const media = p.image
     ? `<img src="${p.image}" alt="${p.name || ''}" loading="lazy">`
@@ -145,7 +148,7 @@ function cardTemplate(p) {
 
   return `
     <article class="card">
-      <a href="#" class="card__media" aria-label="${p.name || 'Скоро в продажу'}">
+      <a href="${p.id ? productUrl(p.id) : '#'}" class="card__media" aria-label="${p.name || 'Скоро в продажу'}">
         ${p.badge ? `<span class="card__badge">${p.badge}</span>` : ''}
         ${media}
       </a>
@@ -156,20 +159,22 @@ function cardTemplate(p) {
     </article>`;
 }
 
-function initCarousel(root) {
+function initCarousel(root, items) {
   const key = root.dataset.carousel;
   const track = root.querySelector('.carousel__track');
   const prev = root.querySelector('.carousel__arrow--prev');
   const next = root.querySelector('.carousel__arrow--next');
 
-  track.innerHTML = (PRODUCTS[key] || []).map(cardTemplate).join('');
+  // Головна: товари з PRODUCTS; інші сторінки передають items самі
+  const list = items || (PRODUCTS[key] || []).map((p, i) => ({ ...p, id: `home-${key}-${i + 1}` }));
+  track.innerHTML = list.map(cardTemplate).join('');
 
   // Heart (favourite) toggle on cards
-  const section = key === 'sale' ? 'Sale' : 'Нові надходження';
+  const section = root.dataset.section || (key === 'sale' ? 'Sale' : 'Нові надходження');
   track.querySelectorAll('.card').forEach((card, i) => {
-    const p = PRODUCTS[key][i];
+    const p = list[i];
     attachFav(card.querySelector('.card__media'), {
-      id: `home-${key}-${i + 1}`,
+      id: p.id,
       category: p.category,
       section,
       name: p.name,
@@ -177,6 +182,7 @@ function initCarousel(root) {
       oldPrice: p.oldPrice,
       image: p.image,
       sale: Boolean(p.badge),
+      link: productUrl(p.id),
     });
   });
 
@@ -319,7 +325,7 @@ function initForm() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('[data-carousel]').forEach(initCarousel);
+  document.querySelectorAll('[data-carousel]').forEach((root) => initCarousel(root));
   initHeader();
   initWishCount();
   initMobileNav();
