@@ -4,3 +4,4 @@
 # Claude Code: personal/local settings stay out of git,
 # project commands and preview config are shared
 .claude/settings.local.json
+.vercel

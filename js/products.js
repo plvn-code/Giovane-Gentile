@@ -151,6 +151,10 @@ function parseProductId(id) {
 }
 
 function getProduct(id) {
+  // Реальні товари з Supabase (завантажує js/supabase.js у window.GG_PRODUCTS_BY_ID)
+  if (typeof window !== 'undefined' && window.GG_PRODUCTS_BY_ID && window.GG_PRODUCTS_BY_ID[id]) {
+    return window.GG_PRODUCTS_BY_ID[id];
+  }
   if (REAL_PRODUCTS[id]) return { id, ...REAL_PRODUCTS[id] };
 
   const info = parseProductId(id);

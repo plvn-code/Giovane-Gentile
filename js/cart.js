@@ -111,7 +111,9 @@ function initCart() {
       return;
     }
     if (e.target.closest('[data-cart-soon]')) {
-      showToast('Сторінка кошика та оформлення — наступний етап');
+      e.preventDefault();
+      if (!Cart.all().length) { showToast('Кошик порожній'); return; }
+      location.href = 'checkout.html';
       return;
     }
     // Мобільна кнопка кошика

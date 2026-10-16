@@ -7,22 +7,25 @@
 
 const PER_PAGE = 20; // 4 в ряд × 5 рядів
 
-/*
-  Поки фото немає — картка показує SOON.
-  Коли з'являться товари, передайте сюди { image, name, price, oldPrice }.
-*/
-function catalogCard(id, category, badge) {
+/* Картка каталогу з реальними даними товару (Supabase). */
+function catalogCard(product, badge) {
+  const img = product.images && product.images[0];
+  const media = img
+    ? `<img src="${escHtml(img)}" alt="${escHtml(product.name)}" loading="lazy">`
+    : '<span class="card__soon card__soon--caps">Soon</span>';
+  const price = product.oldPrice
+    ? `<s>${formatPrice(product.oldPrice)}</s>${formatPrice(product.price)}`
+    : formatPrice(product.price);
   return `
     <article class="card card--catalog">
-      <a href="${productUrl(id)}" class="card__media" aria-label="Скоро в продажу">
+      <a href="${productUrl(product.id)}" class="card__media" aria-label="${escHtml(product.name)}">
         ${badge ? `<span class="card__badge">${badge}</span>` : ''}
-        <span class="card__soon card__soon--caps">Soon</span>
+        ${media}
       </a>
       <div class="card__body">
-        <p class="card__cat">${category}</p>
-        <span class="skeleton skeleton--name"></span>
-        <span class="skeleton skeleton--name2"></span>
-        <span class="skeleton skeleton--price"></span>
+        <p class="card__cat">${escHtml(product.category)}</p>
+        <p class="card__name">${escHtml(product.name)}</p>
+        <p class="card__price">${price}</p>
       </div>
     </article>`;
 }
@@ -55,21 +58,36 @@ function initCatalog() {
       `<li><a href="catalog.html?cat=${catKey}&amp;sub=${key}" class="${key === subKey ? 'is-active' : ''}">${name}</a></li>`));
   document.getElementById('catalog-tabs').innerHTML = tabs.join('');
 
-  // Cards
-  const labels = labelsFor(catKey, subKey);
-  grid.innerHTML = Array.from({ length: PER_PAGE }, (_, i) =>
-    catalogCard(`${catKey}-${subKey || 'all'}-${i + 1}`, labels[i % labels.length], cat.badge)).join('');
-  document.getElementById('catalog-count').textContent = `${PER_PAGE} товарів`;
+  // Cards — реальні товари з Supabase
+  const products = (window.ggCatalogProducts
+    ? window.ggCatalogProducts(catKey, subKey)
+    : []).slice(0, PER_PAGE);
+
+  if (products.length) {
+    grid.innerHTML = products.map((p) =>
+      catalogCard(p, (catKey === 'sale' || p.sale) ? 'Sale' : (cat.badge || (p.isNew ? 'New' : '')))).join('');
+    document.getElementById('catalog-count').textContent =
+      `${products.length} ${products.length === 1 ? 'товар' : 'товарів'}`;
+  } else {
+    grid.innerHTML = '<p class="catalog__empty">У цьому розділі поки немає товарів.</p>';
+    document.getElementById('catalog-count').textContent = '0 товарів';
+  }
 
   // Hearts → wishlist
   const section = subKey ? `${cat.title} · ${cat.subs[subKey]}` : cat.title;
   grid.querySelectorAll('.card').forEach((card, i) => {
+    const p = products[i];
+    if (!p) return;
     attachFav(card.querySelector('.card__media'), {
-      id: `${catKey}-${subKey || 'all'}-${i + 1}`,
-      category: labels[i % labels.length],
+      id: p.id,
+      category: p.category,
       section,
-      sale: catKey === 'sale',
-      link: productUrl(`${catKey}-${subKey || 'all'}-${i + 1}`),
+      name: p.name,
+      price: p.price,
+      oldPrice: p.oldPrice,
+      image: p.images[0] || '',
+      sale: p.sale,
+      link: productUrl(p.id),
     });
   });
 
@@ -85,4 +103,6 @@ function initCatalog() {
   });
 }
 
-document.addEventListener('DOMContentLoaded', initCatalog);
+document.addEventListener('DOMContentLoaded', () => {
+  (window.GG_READY || Promise.resolve()).then(initCatalog);
+});

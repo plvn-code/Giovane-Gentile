@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Оформлення замовлення — Giovane Gentile</title>
+  <meta name="description" content="Оформлення замовлення у бутику Giovane Gentile.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,500;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+  <header class="checkout-head">
+    <a href="index.html" class="checkout-head__logo">
+      <span class="brand">Giovane Gentile</span>
+      <span class="brand__sub">— Italian Boutique —</span>
+    </a>
+    <a href="catalog.html?cat=new" class="checkout-head__back">← Продовжити покупки</a>
+  </header>
+
+  <main class="checkout">
+    <h1 class="checkout__title">Оформлення замовлення</h1>
+
+    <div class="checkout__grid">
+      <!-- Форма -->
+      <form class="checkout__form" id="checkout-form" novalidate>
+        <h2 class="checkout__h2">Контактні дані</h2>
+        <div class="field"><label for="c-name">Імʼя та прізвище *</label><input id="c-name" name="name" required></div>
+        <div class="field"><label for="c-phone">Телефон *</label><input id="c-phone" name="phone" inputmode="tel" placeholder="+380 __ ___ __ __" required></div>
+        <div class="field"><label for="c-email">Email</label><input id="c-email" name="email" type="email" placeholder="you@example.com"></div>
+
+        <h2 class="checkout__h2">Доставка</h2>
+        <div class="field"><label for="c-city">Місто *</label><input id="c-city" name="city" required></div>
+        <div class="field"><label for="c-address">Відділення / адреса *</label><input id="c-address" name="address" required></div>
+        <div class="field"><label for="c-comment">Коментар до замовлення</label><textarea id="c-comment" name="comment" rows="3"></textarea></div>
+
+        <p class="checkout__demo">Оплата у <b>тестовому режимі LiqPay</b> — реальні кошти не списуються.</p>
+        <button type="submit" class="btn btn--dark btn--block" id="c-pay">Перейти до оплати</button>
+        <p class="checkout__error" id="c-error" hidden></p>
+      </form>
+
+      <!-- Підсумок -->
+      <aside class="checkout__summary">
+        <h2 class="checkout__h2">Ваше замовлення</h2>
+        <ul class="checkout__items" id="c-items"></ul>
+        <div class="checkout__row"><span>Товарів</span><b id="c-count">0</b></div>
+        <div class="checkout__row checkout__row--total"><span>Разом</span><b id="c-total">0 ₴</b></div>
+      </aside>
+    </div>
+
+    <!-- Прихована форма для редіректу на LiqPay (реальний режим) -->
+    <form id="liqpay-form" method="POST" action="https://www.liqpay.ua/api/3/checkout" accept-charset="utf-8" hidden>
+      <input type="hidden" name="data" id="liqpay-data">
+      <input type="hidden" name="signature" id="liqpay-signature">
+    </form>
+  </main>
+
+  <!-- Демо-оплата -->
+  <div class="pay-modal" id="pay-modal" hidden>
+    <div class="pay-modal__box">
+      <div class="pay-modal__brand">LiqPay <span>demo</span></div>
+      <p class="pay-modal__sum">До сплати: <b id="pay-sum">0 ₴</b></p>
+      <p class="pay-modal__note">Тестова оплата. Натисніть «Сплатити», щоб підтвердити замовлення — гроші не списуються.</p>
+      <button type="button" class="btn btn--dark btn--block" id="pay-confirm">Сплатити</button>
+      <button type="button" class="btn btn--outline btn--block" id="pay-cancel">Скасувати</button>
+    </div>
+  </div>
+
+  <!-- Успіх -->
+  <div class="pay-done" id="pay-done" hidden>
+    <div class="pay-done__box">
+      <div class="pay-done__check">✓</div>
+      <h2>Дякуємо за замовлення!</h2>
+      <p>Замовлення <b id="done-order"></b> оформлено та оплачено (тестовий режим).</p>
+      <p class="pay-done__sub">Ми звʼяжемося з вами для підтвердження доставки.</p>
+      <a href="index.html" class="btn btn--dark">На головну</a>
+    </div>
+  </div>
+
+  <script src="js/supabase.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

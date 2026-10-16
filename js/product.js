@@ -53,18 +53,36 @@ function initProductPage() {
     ? `<s>${formatPrice(product.oldPrice)}</s><strong>${formatPrice(product.price)}</strong><em>−${discount}%</em>`
     : `<strong>${formatPrice(product.price)}</strong>`;
 
-  /* Gallery (поки без фото — SOON та підписи ракурсів) */
+  /* Gallery — реальні фото товару (Supabase) */
+  const imgs = product.images && product.images.length ? product.images : [];
   const thumbs = $('p-thumbs');
   thumbs.innerHTML = VIEWS.map((v, i) => `
     <button type="button" class="product__thumb${i === 0 ? ' is-active' : ''}" data-view="${i}" aria-label="${v}">
-      ${product.images[i] ? `<img src="${escHtml(product.images[i])}" alt="">` : '<span>Soon</span>'}
+      ${imgs[i] ? `<img src="${escHtml(imgs[i])}" alt="">` : '<span>Soon</span>'}
     </button>`).join('');
+
+  // Головне фото
+  const mainEl = $('p-main');
+  const soonEl = mainEl.querySelector('.product__soon');
+  let mainImg = mainEl.querySelector('.product__photo');
+  if (imgs.length) {
+    if (soonEl) soonEl.hidden = true;
+    if (!mainImg) {
+      mainImg = document.createElement('img');
+      mainImg.className = 'product__photo';
+      mainEl.insertBefore(mainImg, $('p-view'));
+    }
+    mainImg.src = imgs[0];
+    mainImg.alt = product.name;
+  }
+
   thumbs.addEventListener('click', (e) => {
     const btn = e.target.closest('[data-view]');
     if (!btn) return;
     thumbs.querySelectorAll('.product__thumb').forEach((t) => t.classList.toggle('is-active', t === btn));
     $('p-view').textContent = VIEWS[btn.dataset.view];
     const main = $('p-main');
+    if (mainImg && imgs[btn.dataset.view]) mainImg.src = imgs[btn.dataset.view];
     main.classList.remove('is-switch');
     void main.offsetWidth;
     main.classList.add('is-switch');
@@ -190,11 +208,21 @@ function initProductPage() {
     .map(([k, v]) => `<tr><th scope="row">${escHtml(k)}</th><td>${escHtml(v)}</td></tr>`).join('');
 
   /* Related */
-  const related = relatedProducts(product).map((p) => ({ id: p.id, category: p.category, badge: p.sale ? 'Sale' : null }));
+  const related = relatedProducts(product).map((p) => ({
+    id: p.id,
+    category: p.category,
+    name: p.name,
+    price: formatPrice(p.price),
+    oldPrice: p.oldPrice ? formatPrice(p.oldPrice) : null,
+    image: (p.images && p.images[0]) || '',
+    badge: p.sale ? 'Sale' : null,
+  }));
   if (related.length) {
     $('related-section').hidden = false;
     initCarousel($('related'), related);
   }
 }
 
-document.addEventListener('DOMContentLoaded', initProductPage);
+document.addEventListener('DOMContentLoaded', () => {
+  (window.GG_READY || Promise.resolve()).then(initProductPage);
+});

@@ -324,8 +324,32 @@ function initForm() {
   });
 }
 
+/* Реальні товари з Supabase для каруселей головної (data-carousel="new"|"sale") */
+const ggFormatPrice = (n) => `${Math.round(n).toLocaleString('uk-UA').replace(/\s|,/g, ' ')} ₴`;
+function homeCarouselItems(key) {
+  const all = window.GG_PRODUCTS || [];
+  const list = (key === 'sale' ? all.filter((p) => p.sale) : all.filter((p) => p.isNew)).slice(0, 12);
+  return list.map((p) => ({
+    id: p.id,
+    category: p.category,
+    name: p.name,
+    price: ggFormatPrice(p.price),
+    oldPrice: p.oldPrice ? ggFormatPrice(p.oldPrice) : null,
+    image: (p.images && p.images[0]) || '',
+    badge: key === 'sale' || p.sale ? 'Sale' : null,
+  }));
+}
+
 document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('[data-carousel]').forEach((root) => initCarousel(root));
+  (window.GG_READY || Promise.resolve()).then(() => {
+    document.querySelectorAll('[data-carousel]').forEach((root) => {
+      const key = root.dataset.carousel;
+      const items = (window.GG_PRODUCTS && window.GG_PRODUCTS.length && (key === 'new' || key === 'sale'))
+        ? homeCarouselItems(key)
+        : undefined;
+      initCarousel(root, items);
+    });
+  });
   initHeader();
   initWishCount();
   initMobileNav();

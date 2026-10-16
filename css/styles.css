@@ -1777,6 +1777,8 @@ img, video { display: block; max-width: 100%; }
   overflow: hidden;
 }
 .product__main.is-switch .product__soon { animation: heroFade .45s var(--ease) both; }
+.product__photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.product__main.is-switch .product__photo { animation: heroFade .45s var(--ease) both; }
 .product__soon {
   font-family: var(--f-ui);
   font-weight: 600;
@@ -2220,4 +2222,71 @@ img, video { display: block; max-width: 100%; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   html { scroll-behavior: auto; }
   .js .reveal { opacity: 1; transform: none; }
+}
+
+/* ========== CHECKOUT ========== */
+.checkout-head {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 6vw; border-bottom: 1px solid var(--c-line, #e6e4df);
+}
+.checkout-head__logo { text-align: center; text-decoration: none; color: inherit; display: inline-flex; flex-direction: column; }
+.checkout-head__logo .brand { font-family: var(--f-display, 'Bodoni Moda', serif); font-size: 24px; letter-spacing: .02em; }
+.checkout-head__logo .brand__sub { font-family: var(--f-ui, 'Montserrat', sans-serif); font-size: 10px; letter-spacing: .3em; text-transform: uppercase; color: #8a8882; }
+.checkout-head__back { font-size: 13px; letter-spacing: .04em; text-decoration: none; color: #6d6b66; }
+.checkout-head__back:hover { color: var(--c-black, #111); }
+
+.checkout { max-width: 1120px; margin: 0 auto; padding: 46px 6vw 90px; }
+.checkout__title { font-family: var(--f-display, 'Bodoni Moda', serif); font-size: clamp(30px, 5vw, 46px); font-weight: 500; margin: 0 0 34px; }
+.checkout__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 48px; align-items: start; }
+.checkout__h2 { font-family: var(--f-ui, 'Montserrat', sans-serif); font-size: 13px; letter-spacing: .14em; text-transform: uppercase; color: #6d6b66; margin: 0 0 16px; }
+.checkout__form .checkout__h2:not(:first-child) { margin-top: 30px; }
+
+.field { margin-bottom: 16px; display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: 13px; color: #4a4843; }
+.field input, .field textarea {
+  font-family: inherit; font-size: 15px; padding: 12px 14px;
+  border: 1px solid var(--c-line, #e0ded8); border-radius: 2px; background: #fff; color: #1a1a1a;
+  transition: border-color .2s;
+}
+.field input:focus, .field textarea:focus { outline: none; border-color: var(--c-black, #111); }
+
+.checkout__demo { font-size: 13px; color: #6d6b66; background: #faf9f6; border: 1px solid #ece9e2; padding: 10px 12px; border-radius: 2px; margin: 22px 0 14px; }
+.checkout__error { color: #b00020; font-size: 14px; margin-top: 10px; }
+
+.checkout__summary { position: sticky; top: 24px; background: #faf9f6; border: 1px solid #ece9e2; border-radius: 2px; padding: 24px; }
+.checkout__items { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+.checkout__item { display: grid; grid-template-columns: 54px 1fr auto; gap: 12px; align-items: center; }
+.checkout__thumb { width: 54px; height: 68px; background: #efede8; overflow: hidden; border-radius: 2px; }
+.checkout__thumb img { width: 100%; height: 100%; object-fit: cover; }
+.checkout__item-info { display: flex; flex-direction: column; gap: 3px; }
+.checkout__item-name { font-size: 14px; line-height: 1.3; }
+.checkout__item-meta { font-size: 12px; color: #8a8882; }
+.checkout__item-price { font-size: 14px; font-weight: 600; white-space: nowrap; }
+.checkout__empty { color: #8a8882; font-size: 14px; }
+.checkout__row { display: flex; justify-content: space-between; padding: 10px 0; font-size: 14px; border-top: 1px solid #ece9e2; }
+.checkout__row--total { font-size: 18px; font-weight: 700; }
+
+/* Pay modal + success */
+.pay-modal, .pay-done {
+  position: fixed; inset: 0; z-index: 1000; display: grid; place-items: center;
+  background: rgba(20,18,16,.55); padding: 20px;
+}
+.pay-modal__box, .pay-done__box {
+  background: #fff; border-radius: 4px; padding: 34px 30px; max-width: 420px; width: 100%;
+  text-align: center; box-shadow: 0 24px 60px rgba(0,0,0,.25);
+}
+.pay-modal__brand { font-family: var(--f-ui,'Montserrat',sans-serif); font-weight: 700; font-size: 22px; letter-spacing: .02em; margin-bottom: 18px; color: #1a7f37; }
+.pay-modal__brand span { font-weight: 500; font-size: 13px; color: #8a8882; letter-spacing: .14em; text-transform: uppercase; }
+.pay-modal__sum { font-size: 17px; margin: 0 0 8px; }
+.pay-modal__sum b { font-size: 24px; }
+.pay-modal__note { font-size: 13px; color: #6d6b66; margin: 0 0 22px; }
+.pay-modal__box .btn { margin-bottom: 10px; }
+.pay-done__check { width: 64px; height: 64px; border-radius: 50%; background: #1a7f37; color: #fff; font-size: 34px; display: grid; place-items: center; margin: 0 auto 18px; }
+.pay-done__box h2 { font-family: var(--f-display,'Bodoni Moda',serif); font-weight: 500; margin: 0 0 12px; }
+.pay-done__box p { font-size: 15px; color: #4a4843; margin: 0 0 8px; }
+.pay-done__sub { font-size: 13px !important; color: #8a8882 !important; margin-bottom: 20px !important; }
+
+@media (max-width: 860px) {
+  .checkout__grid { grid-template-columns: 1fr; gap: 30px; }
+  .checkout__summary { position: static; order: -1; }
 }
